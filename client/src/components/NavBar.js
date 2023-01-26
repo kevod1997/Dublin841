@@ -4,8 +4,8 @@ import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 const navigation = [
   { name: 'Home', href: '#', current: true },
   { name: 'Turnos', href: '#', current: false },
+  { name: 'Servicios', href: '#', current: false },
   { name: 'Contacto', href: '#', current: false },
-  { name: 'Calendar', href: '#', current: false },
 ]
 
 function classNames(...classes) {
@@ -33,14 +33,14 @@ export default function Example() {
               <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                 <div className="flex flex-shrink-0 items-center">
                   <img
-                    className="block h-8 w-auto lg:hidden"
-                    src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
-                    alt="Your Company"
+                    className="block h-12 w-auto lg:hidden"
+                    src="https://i.ibb.co/ZB8WM9m/DUBLINLOGO.jpg"
+                    alt="Dublin841 Logo"
                   />
                   <img
-                    className="hidden h-8 w-auto lg:block"
-                    src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
-                    alt="Your Company"
+                    className="hidden h-11 w-auto lg:block"
+                    src="https://i.ibb.co/ZB8WM9m/DUBLINLOGO.jpg"
+                    alt="Dublin841 Logo"
                   />
                 </div>
                 <div className="hidden sm:ml-6 sm:block">
