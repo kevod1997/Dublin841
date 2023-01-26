@@ -1,0 +1,9 @@
+body {
+    font-family: 'Sancreek', cursive;
+  }
+
+  @media (max-width: 640px) {
+    .carouselTitle {
+        visibility: hidden;
+    }
+}

@@ -1,6 +1,12 @@
-import React from 'react'
+import React from 'react';
+import {
+  Popover,
+  PopoverHandler,
+  PopoverContent,
+} from "@material-tailwind/react";
 
 function Turnos() {
+
   return (
     <div class="flex flex-col m-4">
   <h2 class="text-xl text-center font-bold mb-4 mt-4 text-stone-600">
@@ -65,12 +71,18 @@ function Turnos() {
     </div>
 
     <div class="grid md:flex grid-cols-2 justify-end space-x-4 w-full mt-6">
-      <button class="px-4 py-2 rounded-lg text-stone-50 bg-stone-400 hover:bg-stone-500 font-bold text-white shadow-lg shadow-stone-200 transition ease-in-out duration-200 translate-10">
-        Reset
+    <Popover>
+        <PopoverHandler>
+        <button  class="px-4 py-2 rounded-lg text-stone-50 bg-stone-400 hover:bg-stone-500 font-bold text-white shadow-lg shadow-stone-200 transition ease-in-out duration-200 translate-10">
+        Horarios
       </button>
-
+        </PopoverHandler>
+        <PopoverContent className='m-2'>
+          MARTES A VIERNES DE 8 A 12 y de 16 A 20. <br/> SABADOS DE 8 A 16.
+        </PopoverContent>
+      </Popover>
       <button class="px-4 py-2 rounded-lg text-orange-50 bg-orange-400 hover:bg-orange-500 font-bold text-white shadow-lg shadow-orange-200 transition ease-in-out duration-200 translate-10">
-        Search
+        Saca tu turno
       </button>
     </div>
   </div>

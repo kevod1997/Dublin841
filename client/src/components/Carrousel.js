@@ -3,7 +3,37 @@ import "pure-react-carousel/dist/react-carousel.es.css";
 
 function Carrousel() {
   return (
-<div id="carouselExampleCaptions" class="carousel slide relative" data-bs-ride="carousel">
+    <>
+    <div class="p-4  bg-gradient-to-t from-gray-200 via-gray-400 to-gray-600">
+    <h1 className="carouselTitle sm:text-center sm:font-bold sm:text-4xl border-gray-800 sm:border-b-2 sm:mr-5 sm:ml-5 sm:mt-3 md:ml-16 md:mr-16 lg:mr-4 lg:ml-4">Dublin 841</h1>
+  <div class="flex items-center justify-center ">
+    <div class="container">
+      <div class="mt-8 grid grid-cols-2 gap-2 rounded-xl bg-gradient-to-b from-gray-900 to-gray-600 bg-gradient-to-r p-2 md:grid-cols-4 w-full h-full">
+        <div class="group relative overflow-hidden rounded-xl">
+          <div class="absolute inset-0 h-full w-full group-hover:bg-rose-400/20"></div>
+
+          <img src="https://i.ibb.co/p0260z3/47585089-372855590141574-5924061720092632660-n.jpg" class="h-full w-full" alt="Nasi lemak cover" />
+        </div>
+        <div class="group relative overflow-hidden rounded-xl">
+          <div class="absolute inset-0 h-full w-full group-hover:bg-rose-400/20"></div>
+
+          <img src="https://i.ibb.co/jGsjw23/42561253-672453366473594-1212826202992126390-n.jpg" class="h-full w-full" alt="Nasi lemak cover" />
+        </div>
+        <div class="group relative overflow-hidden rounded-xl">
+          <div class="absolute inset-0 h-full w-full group-hover:bg-rose-400/20"></div>
+
+          <img src="https://i.ibb.co/bX6G6WY/43914638-176150079961613-2039580422113879951-n.jpg" class="h-full w-full" alt="Nasi lemak cover" />
+        </div>
+        <div class="group relative overflow-hidden rounded-xl">
+          <div class="absolute inset-0 h-full w-full group-hover:bg-rose-400/20"></div>
+
+          <img src="https://i.ibb.co/0tstcrv/41510345-322778174968785-3880681171817292685-n.jpg" class="h-full w-full" alt="Nasi lemak cover" />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{/* <div id="carouselExampleCaptions" class="carousel slide relative" data-bs-ride="carousel">
   <div class="carousel-indicators absolute right-0 bottom-0 left-0 flex justify-center p-0 mb-4">
     <button
       type="button"
@@ -76,7 +106,8 @@ function Carrousel() {
     <span class="carousel-control-next-icon inline-block bg-no-repeat" aria-hidden="true"></span>
     <span class="visually-hidden">Next</span>
   </button>
-</div>
+</div> */}
+    </>
   )
 }
 

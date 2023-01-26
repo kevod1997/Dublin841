@@ -4,7 +4,7 @@ import { BsInstagram, BsWhatsapp } from "react-icons/bs";
 function Contacto() {
   return (
     <>
-      <h1 className="text-center">CONTACTANOS A TRAVES DE NUESTRAS REDES</h1>
+      <h1 className="text-center mr-4 ml-4">CONTACTANOS A TRAVES DE NUESTRAS REDES</h1>
       <div className="2xl:container 2xl:mx-auto lg:px-20 md:py-12 md:px-6 py-9 px-4">
         <div className=" grid lg:grid-cols-2 md:grid-cols-2 grid-cols-1 lg:gap-8 gap-6 ">
           {/* Safe Shopping Grid Card */}
