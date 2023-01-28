@@ -81,7 +81,7 @@ function Turnos() {
           MARTES A VIERNES DE 8 A 12 y de 16 A 20. <br/> SABADOS DE 8 A 16.
         </PopoverContent>
       </Popover>
-      <button class="px-4 py-2 rounded-lg text-orange-50 bg-orange-400 hover:bg-orange-500 font-bold text-white shadow-lg shadow-orange-200 transition ease-in-out duration-200 translate-10">
+      <button class="px-4 py-2 rounded-lg bg-green-600 hover:bg-green-500 font-bold text-white shadow-lg shadow-green-200 transition ease-in-out duration-200 translate-10">
         Saca tu turno
       </button>
     </div>

@@ -1,11 +1,14 @@
 import React from "react";
 import "pure-react-carousel/dist/react-carousel.es.css";
+import HeaderTitle from "./HeaderTitle";
 
 function Carrousel() {
   return (
     <>
-    <div class="p-4  bg-gradient-to-t from-gray-200 via-gray-400 to-gray-600">
-    <h1 className="carouselTitle sm:text-center sm:font-bold sm:text-4xl border-gray-800 sm:border-b-2 sm:mr-5 sm:ml-5 sm:mt-3 md:ml-16 md:mr-16 lg:mr-4 lg:ml-4">Dublin 841</h1>
+    <div class="p-4 bg-gradient-to-t from-gray-200 via-gray-400 to-gray-600 ">
+     <HeaderTitle />
+
+    {/* <h1 className="carouselTitle sm:text-center sm:font-bold sm:text-4xl border-gray-800 sm:border-b-2 sm:mr-5 sm:ml-5 sm:mt-3 md:ml-16 md:mr-16 lg:mr-4 lg:ml-4">Dublin 841</h1> */}
   <div class="flex items-center justify-center ">
     <div class="container">
       <div class="mt-8 grid grid-cols-2 gap-2 rounded-xl bg-gradient-to-b from-gray-900 to-gray-600 bg-gradient-to-r p-2 md:grid-cols-4 w-full h-full">
