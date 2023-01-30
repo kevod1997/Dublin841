@@ -4,6 +4,7 @@ import {
   PopoverHandler,
   PopoverContent,
 } from "@material-tailwind/react";
+import Calendar from '../components/Calendar';
 
 function Turnos() {
 
@@ -36,12 +37,8 @@ function Turnos() {
       </div>
 
       <div class="flex flex-col">
-        <label for="date" class="font-medium text-sm text-stone-600">Fecha</label>
-        <input
-          type="date"
-          id="date"
-          class="mt-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
-        />
+    <label for="date"  class="font-medium text-sm text-stone-600">Fecha y Hora</label>
+        <Calendar/>
       </div>
 
       <div class="flex flex-col">

@@ -1,21 +1,37 @@
-import { Disclosure} from '@headlessui/react'
-import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
-import {NavLink } from 'react-router-dom'
+import { Disclosure } from "@headlessui/react";
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import { Link, NavLink } from "react-router-dom";
+import React from "react";
 
 const navigation = [
-  { name: 'Home', href: '#', current: true },
-  { name: 'Turnos', href: '#turnos', current: false },
-  { name: 'Servicios', href: '#servicios', current: false },
-  { name: 'Contacto', href: '#contacto', current: false },
-]
+  { name: "Home", href: "#", current: true },
+  { name: "Turnos", href: "#turnos", current: false },
+  { name: "Servicios", href: "#servicios", current: false },
+  { name: "Contacto", href: "#contacto", current: false },
+];
+
+const filteredNavigation = navigation.slice(0, 1);
 
 function classNames(...classes) {
-  return classes.filter(Boolean).join(' ')
+  return classes.filter(Boolean).join(" ");
 }
 
 export default function NavBar() {
+  console.log(filteredNavigation);
+  function handleClick(name) {
+    const element = refs[name];
+    element.scrollIntoView({ behavior: "smooth" });
+  }
+  const refs = {};
+
+  navigation.forEach((item) => {
+    refs[item.name] = React.createRef();
+  });
   return (
-    <Disclosure as="nav" className="bg-gray-800 sticky top-0 bottom-0 left-0 right-0 z-50">
+    <Disclosure
+      as="nav"
+      className="bg-gray-800 sticky top-0 bottom-0 left-0 right-0 z-50"
+    >
       {({ open }) => (
         <>
           <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8 ">
@@ -33,20 +49,35 @@ export default function NavBar() {
               </div>
               <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                 <div className="flex flex-shrink-0 items-center">
-                  <NavLink to="/">
-                  <img
-                    className="block h-12 w-auto lg:hidden"
-                    src="https://i.ibb.co/ZB8WM9m/DUBLINLOGO.jpg"
-                    alt="Dublin841 Logo"
+                  <Link to="/">
+                    <img
+                      className="block h-12 w-auto lg:hidden"
+                      src="https://i.ibb.co/ZB8WM9m/DUBLINLOGO.jpg"
+                      alt="Dublin841 Logo"
                     />
-                    </NavLink>
-                    <NavLink to="/">
-                  <img
-                    className="hidden h-11 w-auto lg:block"
-                    src="https://i.ibb.co/ZB8WM9m/DUBLINLOGO.jpg"
-                    alt="Dublin841 Logo"
-                  />
-                    </NavLink>
+                  </Link>
+                  <NavLink
+                    key={filteredNavigation.name}
+                    to={filteredNavigation.href}
+                    ref={refs[filteredNavigation.name]}
+                    onClick={() => handleClick(filteredNavigation.name)}
+                    aria-current={
+                      filteredNavigation.current ? "page" : undefined
+                    }
+                  >
+                    <img
+                      className="hidden h-11 w-auto lg:block"
+                      src="https://i.ibb.co/ZB8WM9m/DUBLINLOGO.jpg"
+                      alt="Dublin841 Logo"
+                    />
+                  </NavLink>
+                  {/* <Link to="/">
+                    <img
+                      className="hidden h-11 w-auto lg:block"
+                      src="https://i.ibb.co/ZB8WM9m/DUBLINLOGO.jpg"
+                      alt="Dublin841 Logo"
+                    />
+                  </Link> */}
                 </div>
                 <div className="hidden sm:ml-6 sm:block">
                   <div className="flex space-x-4">
@@ -54,11 +85,15 @@ export default function NavBar() {
                       <NavLink
                         key={item.name}
                         to={item.href}
+                        ref={refs[item.name]}
+                        onClick={() => handleClick(item.name)}
                         className={classNames(
-                          item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                          'px-3 py-2 rounded-md text-sm font-medium'
+                          item.current
+                            ? "bg-gray-900 text-white"
+                            : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                          "px-3 py-2 rounded-md text-sm font-medium"
                         )}
-                        aria-current={item.current ? 'page' : undefined}
+                        aria-current={item.current ? "page" : undefined}
                       >
                         {item.name}
                       </NavLink>
@@ -68,22 +103,27 @@ export default function NavBar() {
               </div>
             </div>
           </div>
-         <Disclosure.Panel className="sm:hidden">
+          <Disclosure.Panel className="sm:hidden">
             <div className="space-y-1 px-2 pt-2 pb-3">
               {navigation.map((item) => (
-                <NavLink to={item.href}>
-
-                <Disclosure.Button
-                  key={item.name} 
-                  as="a"
-                  className={classNames(
-                    item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                    'block px-3 py-2 rounded-md text-base font-medium'
-                  )}
-                  aria-current={item.current ? 'page' : undefined}
+                <NavLink
+                  to={item.href}
+                  ref={refs[item.name]}
+                  onClick={() => handleClick(item.name)}
                 >
-                  {item.name}
-                </Disclosure.Button>
+                  <Disclosure.Button
+                    key={item.name}
+                    as="a"
+                    className={classNames(
+                      item.current
+                        ? "bg-gray-900 text-white"
+                        : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                      "block px-3 py-2 rounded-md text-base font-medium"
+                    )}
+                    aria-current={item.current ? "page" : undefined}
+                  >
+                    {item.name}
+                  </Disclosure.Button>
                 </NavLink>
               ))}
             </div>
@@ -91,5 +131,5 @@ export default function NavBar() {
         </>
       )}
     </Disclosure>
-  )
+  );
 }

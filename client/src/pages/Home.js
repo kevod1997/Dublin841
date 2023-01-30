@@ -17,11 +17,11 @@ function Home() {
 
   return (
     <>
-      <section id="servicios">
-        <Servicios />
-      </section>
       <section id="turnos">
         <Turnos />
+      </section>
+      <section id="servicios">
+        <Servicios />
       </section>
       <section id="contacto">
         <Contacto />

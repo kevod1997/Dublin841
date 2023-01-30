@@ -14,6 +14,10 @@ const postSchema = new mongoose.Schema({
     telefono:{
         type: Number,
         required: true
+    },
+    duracion: {
+        type: Number,
+        required: true
     }
 })
 
