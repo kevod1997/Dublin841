@@ -4,7 +4,7 @@ import {
   PopoverHandler,
   PopoverContent,
 } from "@material-tailwind/react";
-import Calendar from '../components/Calendar';
+import Modal from '../components/Modal';
 
 function Turnos() {
 
@@ -38,7 +38,7 @@ function Turnos() {
 
       <div class="flex flex-col">
     <label for="date"  class="font-medium text-sm text-stone-600">Fecha y Hora</label>
-        <Calendar/>
+        <Modal/>
       </div>
 
       <div class="flex flex-col">
@@ -53,18 +53,7 @@ function Turnos() {
           <option>Corte y Barba</option>
         </select>
       </div>
-      <div class="flex flex-col">
-        <label for="time" class="font-medium text-sm text-stone-600">Duracion del turno (mins)</label>
-
-        <select
-          id="time"
-          class="mt-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
-        >
-          <option>20</option>
-          <option>30</option>
-          <option>40</option>
-        </select>
-      </div>
+     
     </div>
 
     <div class="grid md:flex grid-cols-2 justify-end space-x-4 w-full mt-6">

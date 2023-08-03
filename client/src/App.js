@@ -6,13 +6,12 @@ import Carrousel from "./components/Carrousel";
 import Home from "./pages/Home";
 import {TurnProvider} from './context/TurnContext'
 import TurnForm from "./components/TurnForm";
-import Calendar from "./components/Calendar";
 
 function App() {
   return (
     <>
       <BrowserRouter>
-      <TurnProvider>
+      {/* <TurnProvider> */}
         <NavBar />
         <Carrousel />
         <Routes>
@@ -20,7 +19,7 @@ function App() {
           <Route path="/new" element={<TurnForm/>}/>
         </Routes>
         <Footer />
-      </TurnProvider>
+      {/* </TurnProvider> */}
       </BrowserRouter>
     </>
   );
