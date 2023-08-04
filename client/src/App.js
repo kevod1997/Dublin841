@@ -5,9 +5,9 @@ import Footer from "./pages/Footer";
 import Carrousel from "./components/Carrousel";
 import Home from "./pages/Home";
 import {TurnProvider} from './context/TurnContext'
-import TurnForm from "./components/TurnForm";
 
 function App() {
+
   return (
     <>
       <BrowserRouter>
@@ -16,7 +16,6 @@ function App() {
         <Carrousel />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/new" element={<TurnForm/>}/>
         </Routes>
         <Footer />
       {/* </TurnProvider> */}

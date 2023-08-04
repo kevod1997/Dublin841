@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Popover,
   PopoverHandler,
@@ -7,6 +7,16 @@ import {
 import Modal from '../components/Modal';
 
 function Turnos() {
+  const [selectedTime, setSelectedTime] = useState("");
+  const [selectedDay, setSelectedDay] = useState("");
+
+  const handleSelectedTime = (time) => {
+    setSelectedTime(time);
+  };
+
+  const handleSelectedDay = (day) => {
+    setSelectedDay(day);
+  };
 
   return (
     <div class="flex flex-col m-4">
@@ -38,7 +48,26 @@ function Turnos() {
 
       <div class="flex flex-col">
     <label for="date"  class="font-medium text-sm text-stone-600">Fecha y Hora</label>
-        <Modal/>
+    {selectedTime ? (
+  <>
+    <input
+      type="text"
+      id="date"
+      readOnly
+      class="mt-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
+    />
+    <input
+      type="text"
+      value={selectedTime}
+      readOnly
+      id="hour"
+      class="mt-4 mb-4 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
+    />
+  </>
+) : (
+  ""
+)}
+        <Modal selectedTime={selectedTime} handleSelectedTime={handleSelectedTime} selectedDay={selectedDay} handleSelectedDay={handleSelectedDay} />
       </div>
 
       <div class="flex flex-col">

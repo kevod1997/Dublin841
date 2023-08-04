@@ -1,7 +1,8 @@
 import React from "react";
 import Calendar from "./Calendar";
+import Turnos from "./Turnos";
 
-function Modal() {
+function Modal({ selectedTime, handleSelectedTime, selectedDay, handleSelectedDay}) {
   return (
     <>
       <button
@@ -22,24 +23,18 @@ function Modal() {
       >
         <div class="modal-dialog modal-fullscreen relative w-auto pointer-events-none">
           <div class="modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding rounded-md outline-none text-current">
-            <div class="modal-header flex items-center text-center justify-center center p-4 border-b border-gray-200 rounded-t-md">
-              <h5
+            <div class="modal-header flex items-center text-center justify-center p-4 border-b border-gray-200 rounded-t-md">
+              <h1
                 class="text-xl text-center font-medium leading-normal text-gray-800"
                 id="exampleModalFullscreenLabel"
               >
                 Saca tu turno!
-              </h5>
-
-              <button
-                type="button"
-                class="btn-close box-content w-4 h-4 p-1 text-black border-none rounded-none opacity-50 focus:shadow-none focus:outline-none focus:opacity-100 hover:text-black hover:opacity-75 hover:no-underline"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-              ></button>
+              </h1>
             </div>
-            <div class="modal-body p-4 border-cyan-800 ">
-              <Calendar/> 
+            <div>
+              <Calendar selectedDay={selectedDay} handleSelectedDay={handleSelectedDay} />
             </div>
+            <Turnos selectedTime={selectedTime} handleSelectedTime={handleSelectedTime}/>
             <div class="modal-footer flex flex-shrink-0 flex-wrap items-center justify-end p-4 border-t border-gray-200 rounded-b-md">
               <button
                 type="button"
