@@ -1,24 +1,10 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { useTurns } from "../context/TurnContext";
 
-const Turnos = ({ selectedTime, handleSelectedTime }) => {
-  const times = [
-    "08:00",
-    "09:30",
-    "11:00",
-    "13:30",
-    "15:00",
-    "17:30",
-    "19:00",
-    "10:00",
-    "12:30",
-    "14:00",
-    "16:30",
-    "18:00",
-    // ... Agrega más horas de prueba aquí
-  ];
-
+const Turnos = ({ selectedTime, handleSelectedTime, selectedDay }) => {
+  const { turns, turnError } = useTurns();
   const [selectedPeriod, setSelectedPeriod] = useState("");
-  
+
   const handlePeriodChange = (period) => {
     setSelectedPeriod(period);
   };
@@ -27,8 +13,9 @@ const Turnos = ({ selectedTime, handleSelectedTime }) => {
     handleSelectedTime(time); // Llama a la función del abuelo para guardar la hora seleccionada
   };
 
-  // Filtrar los turnos según las opciones seleccionadas por el usuario
-  const filteredTimes = times.filter((time) => {
+// Filtrar los turnos según las opciones seleccionadas por el usuario
+const filteredTimes = Array.isArray(turns)
+? turns.filter((time) => {
     const hour = parseInt(time.split(":")[0], 10);
     if (selectedPeriod === "morning") {
       return hour >= 8 && hour < 13;
@@ -37,57 +24,85 @@ const Turnos = ({ selectedTime, handleSelectedTime }) => {
     } else {
       return ""; // Mostrar todos los turnos si no se selecciona un período específico
     }
-  });
+  })
+: [];
 
+  const style = `bg-white p-3 md:p-4 rounded-lg shadow hover:opacity-50 ${
+    selectedTime === filteredTimes
+      ? "bg-green-500 text-white hover:opacity-100"
+      : ""
+  }`;
+  const isTimeAvailable = filteredTimes.includes(selectedTime);
+  console.log(turnError);
+  console.log(turns);
   return (
-    <div className="mt-8 mb-4">
-      <div className="flex items-center mb-4">
-        <p className="text-lg font-medium leading-normal text-gray-800 ml-3">
-          Horarios disponibles
-        </p>
-        <div className="ml-6">
-          <button
-            className={`px-4 py-2 rounded-lg ${
-              selectedPeriod === "morning"
-                ? "bg-blue-500 text-white"
-                : "bg-gray-200 text-gray-800"
-            }`}
-            onClick={() => handlePeriodChange("morning")}
-          >
-            Mañana
-          </button>
-          <button
-            className={`px-4 py-2 rounded-lg ml-2 ${
-              selectedPeriod === "afternoon"
-                ? "bg-blue-500 text-white"
-                : "bg-gray-200 text-gray-800"
-            }`}
-            onClick={() => handlePeriodChange("afternoon")}
-          >
-            Tarde
-          </button>
+    <>
+      <div className="mt-8 mb-4">
+        <div className="flex items-center mb-4">
+          <p className="text-lg font-medium leading-normal text-gray-800 ml-3 ">
+            Horarios disponibles
+          </p>
+          <div className="ml-6">
+            <div className="flex">
+              <button
+                className={`flex-grow px-4 py-2 mb-2 rounded-lg ${
+                  selectedPeriod === "morning"
+                    ? "bg-blue-500 text-white"
+                    : "bg-gray-200 text-gray-800"
+                }`}
+                onClick={() => handlePeriodChange("morning")}
+              >
+                Mañana
+              </button>
+              <button
+                className={`flex-grow px-4 py-2 rounded-lg ml-4 mr-6 mb-2 ${
+                  selectedPeriod === "afternoon"
+                    ? "bg-blue-500 text-white"
+                    : "bg-gray-200 text-gray-800"
+                }`}
+                onClick={() => handlePeriodChange("afternoon")}
+              >
+                Tarde
+              </button>
+            </div>
+          </div>
         </div>
-      </div>
-      <div className="container mx-auto">
-        <div className="grid grid-cols-3 sm:grid-cols-2lg:grid-cols-4 xl:grid-cols-5 gap-4 mt-4">
-          {filteredTimes.map((time, index) => {
-            return (
+        <div className="container mx-auto">
+          {turns.length === 0 && turnError === null ? (
+            <p className="text-center text-red-500 font-bold m-20">
+              No hay turnos disponibles para este día
+            </p>
+          ) : null}
+          {turnError ? (
+            <p className="text-center text-red-500 font-bold m-20">
+              {turnError}
+            </p>
+          ) : ""}
+          {selectedTime && selectedDay && isTimeAvailable ? (
+            <div className="border rounded">
+              <p className="m-4 text-center text-black font-bold">
+                {" "}
+                Selecionaste el turno de las {selectedTime} horas del dia{" "}
+                {selectedDay}{" "}
+              </p>
+            </div>
+          ) : (
+            ""
+          )}
+          <div className="grid grid-cols-3 sm:grid-cols-2lg:grid-cols-4 xl:grid-cols-5 gap-4 mt-4">
+            {filteredTimes.map((time, index) => (
               <button
                 key={index}
-                className={`bg-white p-3 md:p-4 rounded-lg shadow hover:opacity-50 ${
-                  time === selectedTime
-                    ? "bg-green-500 text-white hover:opacity-100"
-                    : ""
-                }`}
+                className={style}
                 onClick={() => handleTimeSelect(time)}
               >
                 <p className="text-lg font-medium text-gray-800">{time}</p>
               </button>
-            );
-          })}
+            ))}
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

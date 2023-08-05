@@ -3,7 +3,7 @@ import React from "react";
 function HeaderTitle() {
   return (
     <>
-    <div class="nine -mb-8">
+    <div className="nine -mb-8">
   <h1 className="titleHeader">Dublin 841<span className="spanHeader">Peluqueria y Barberia</span></h1>
 </div>
     </>

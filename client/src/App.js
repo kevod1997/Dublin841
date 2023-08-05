@@ -11,14 +11,14 @@ function App() {
   return (
     <>
       <BrowserRouter>
-      {/* <TurnProvider> */}
+      <TurnProvider>
         <NavBar />
         <Carrousel />
         <Routes>
           <Route path="/" element={<Home />} />
         </Routes>
         <Footer />
-      {/* </TurnProvider> */}
+      </TurnProvider>
       </BrowserRouter>
     </>
   );

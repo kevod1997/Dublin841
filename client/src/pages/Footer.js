@@ -3,48 +3,48 @@ import React from "react";
 function Footer() {
   return (
     <>
-      <footer class="text-center bg-gray-900 text-white">
-        <div class="container px-6 pt-6">
-          <div class="grid lg:grid-cols-2 md:grid-cols-2">
-            <div class="mb-6">
-              <h5 class="uppercase font-bold mb-2.5">Navegacion</h5>
+      <footer className="text-center bg-gray-900 text-white">
+        <div className="container px-6 pt-6">
+          <div className="grid lg:grid-cols-2 md:grid-cols-2">
+            <div className="mb-6">
+              <h5 className="uppercase font-bold mb-2.5">Navegacion</h5>
 
-              <ul class="list-none mb-0">
+              <ul className="list-none mb-0">
                 <li className="mb-2">
                   <a href="#!" className="text-white">
                     Home
                   </a>
                 </li>
                 <li className="mb-2">
-                  <a href="#!" class="text-white">
+                  <a href="#!" className="text-white">
                     Servicios
                   </a>
                 </li>
                 <li className="mb-2">
-                  <a href="#!" class="text-white">
+                  <a href="#!" className="text-white">
                     Turnos
                   </a>
                 </li>
                 <li>
-                  <a href="#!" class="text-white">
+                  <a href="#!" className="text-white">
                     Contacto
                   </a>
                 </li>
               </ul>
             </div>
 
-            <div class="mb-6">
-              <h5 class="uppercase font-bold mb-2.5 text-center">Contacto</h5>
+            <div className="mb-6">
+              <h5 className="uppercase font-bold mb-2.5 text-center">Contacto</h5>
 
-              <ul class="list-none mb-0">
+              <ul className="list-none mb-0">
                 <li>
-                  <p class="flex items-center justify-center md:justify-center mb-2">
+                  <p className="flex items-center justify-center md:justify-center mb-2">
                     <svg
                       aria-hidden="true"
                       focusable="false"
                       data-prefix="fas"
                       data-icon="home"
-                      class="w-4 mr-4"
+                      className="w-4 mr-4"
                       role="img"
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 576 512"
@@ -58,13 +58,13 @@ function Footer() {
                   </p>
                 </li>
                 <li>
-                  <p class="flex items-center justify-center md:justify-center mb-2">
+                  <p className="flex items-center justify-center md:justify-center mb-2">
                     <svg
                       aria-hidden="true"
                       focusable="false"
                       data-prefix="fas"
                       data-icon="phone"
-                      class="w-4 mr-4"
+                      className="w-4 mr-4"
                       role="img"
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 512 512"
@@ -78,13 +78,13 @@ function Footer() {
                   </p>
                 </li>
                 <li>
-                  <p class="flex items-center justify-center md:justify-center mb-2">
+                  <p className="flex items-center justify-center md:justify-center mb-2">
                     <svg
                       aria-hidden="true"
                       focusable="false"
                       data-prefix="fas"
                       data-icon="phone"
-                      class="w-4 mr-4"
+                      className="w-4 mr-4"
                       role="img"
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 512 512"
@@ -98,13 +98,13 @@ function Footer() {
                   </p>
                 </li>
                 <li>
-                  <p class="flex items-center justify-center md:justify-center ">
+                  <p className="flex items-center justify-center md:justify-center ">
                     <svg
                       aria-hidden="true"
                       focusable="false"
                       data-prefix="fas"
                       data-icon="envelope"
-                      class="w-4 mr-4"
+                      className="w-4 mr-4"
                       role="img"
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 512 512"
@@ -123,7 +123,7 @@ function Footer() {
         </div>
 
         <div
-          class="text-center p-4"
+          className="text-center p-4"
           style={{ backgroundColor: "rgba(0, 0, 0, 0.2)" }}
         >
           © 2023 Copyright: Dublin 841
