@@ -1,9 +1,8 @@
-import { useState } from "react";
 import { useTurns } from "../context/TurnContext";
 
 const Turnos = ({ selectedTime, handleSelectedTime, selectedDay }) => {
-  const { turns, turnError } = useTurns();
-  const [selectedPeriod, setSelectedPeriod] = useState("");
+  const { turns, turnError, selectedPeriod, setSelectedPeriod } = useTurns();
+  
 
   const handlePeriodChange = (period) => {
     setSelectedPeriod(period);
@@ -13,19 +12,19 @@ const Turnos = ({ selectedTime, handleSelectedTime, selectedDay }) => {
     handleSelectedTime(time); // Llama a la función del abuelo para guardar la hora seleccionada
   };
 
-// Filtrar los turnos según las opciones seleccionadas por el usuario
-const filteredTimes = Array.isArray(turns)
-? turns.filter((time) => {
-    const hour = parseInt(time.split(":")[0], 10);
-    if (selectedPeriod === "morning") {
-      return hour >= 8 && hour < 13;
-    } else if (selectedPeriod === "afternoon") {
-      return hour >= 13 && hour < 20;
-    } else {
-      return ""; // Mostrar todos los turnos si no se selecciona un período específico
-    }
-  })
-: [];
+  // Filtrar los turnos según las opciones seleccionadas por el usuario
+  const filteredTimes = Array.isArray(turns)
+    ? turns.filter((time) => {
+        const hour = parseInt(time.split(":")[0], 10);
+        if (selectedPeriod === "morning") {
+          return hour >= 8 && hour < 13;
+        } else if (selectedPeriod === "afternoon") {
+          return hour >= 13 && hour < 20;
+        } else {
+          return ""; 
+        }
+      })
+    : [];
 
   const style = `bg-white p-3 md:p-4 rounded-lg shadow hover:opacity-50 ${
     selectedTime === filteredTimes
@@ -45,6 +44,7 @@ const filteredTimes = Array.isArray(turns)
           <div className="ml-6">
             <div className="flex">
               <button
+                type="button"
                 className={`flex-grow px-4 py-2 mb-2 rounded-lg ${
                   selectedPeriod === "morning"
                     ? "bg-blue-500 text-white"
@@ -55,6 +55,7 @@ const filteredTimes = Array.isArray(turns)
                 Mañana
               </button>
               <button
+                type="button"
                 className={`flex-grow px-4 py-2 rounded-lg ml-4 mr-6 mb-2 ${
                   selectedPeriod === "afternoon"
                     ? "bg-blue-500 text-white"
@@ -77,13 +78,15 @@ const filteredTimes = Array.isArray(turns)
             <p className="text-center text-red-500 font-bold m-20">
               {turnError}
             </p>
-          ) : ""}
+          ) : (
+            ""
+          )}
           {selectedTime && selectedDay && isTimeAvailable ? (
             <div className="border rounded">
               <p className="m-4 text-center text-black font-bold">
                 {" "}
                 Selecionaste el turno de las {selectedTime} horas del dia{" "}
-                {selectedDay}{" "}
+                {selectedDay}.{" "}
               </p>
             </div>
           ) : (
@@ -92,6 +95,7 @@ const filteredTimes = Array.isArray(turns)
           <div className="grid grid-cols-3 sm:grid-cols-2lg:grid-cols-4 xl:grid-cols-5 gap-4 mt-4">
             {filteredTimes.map((time, index) => (
               <button
+                type="button"
                 key={index}
                 className={style}
                 onClick={() => handleTimeSelect(time)}

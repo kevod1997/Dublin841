@@ -14,6 +14,7 @@ export const TurnProvider = ({ children }) => {
   const [turns, setTurns] = useState([]);
   const [turnError, setTurnError] = useState(); 
   const [startDate, setStartDate] = useState();
+  const [selectedPeriod, setSelectedPeriod] = useState("");
 
   useEffect(() => {
     if (startDate) {
@@ -33,7 +34,7 @@ export const TurnProvider = ({ children }) => {
   const createTurn = async (turn) => {
     try {
       const res = await createTurnRequest(turn);
-      setTurns(res.data);
+      console.log(res);
     } catch (error) {
       console.log(error);
     }
@@ -61,7 +62,7 @@ export const TurnProvider = ({ children }) => {
 
   return (
     <turnContext.Provider
-      value={{ turns, startDate, setStartDate, turnError, createTurn }}
+      value={{ turns, startDate, setStartDate, turnError, createTurn, selectedPeriod, setSelectedPeriod }}
     >
       {children}
     </turnContext.Provider>

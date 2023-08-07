@@ -1,6 +1,6 @@
 import React from "react";
 import Calendar from "./Calendar";
-import Turnos from "./Turnos";
+import Turnos from "./TurnForm";
 
 function Modal({ selectedTime, handleSelectedTime, selectedDay, handleSelectedDay}) {
 
@@ -19,7 +19,7 @@ function Modal({ selectedTime, handleSelectedTime, selectedDay, handleSelectedDa
       </button>
 
       <div
-        className="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto"
+        className="modal fade fixed top-0 bottom-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto"
         id="exampleModalFullscreen"
         tabIndex="-1"
         aria-labelledby="exampleModalFullscreenLabel"
@@ -36,7 +36,7 @@ function Modal({ selectedTime, handleSelectedTime, selectedDay, handleSelectedDa
               </h1>
             </div>
             <div>
-              <Calendar selectedDay={selectedDay} handleSelectedDay={handleSelectedDay} />
+              <Calendar selectedDay={selectedDay} handleSelectedDay={handleSelectedDay} handleSelectedTime={handleSelectedTime} />
             </div>
             <Turnos selectedTime={selectedTime} handleSelectedTime={handleSelectedTime} selectedDay={selectedDay}/>
             <div className="modal-footer flex flex-shrink-0 flex-wrap items-center justify-end p-4 border-t border-gray-200 rounded-b-md">

@@ -6,14 +6,12 @@ import "react-datepicker/dist/react-datepicker.css";
 import { useTurns } from "../context/TurnContext";
 registerLocale("es", es);
 
-function Calendar({ selectedDay, handleSelectedDay }) {
+function Calendar({ handleSelectedTime, handleSelectedDay }) {
   const {startDate, setStartDate} = useTurns()
   const isWeekday = (date) => {
     const day = getDay(date);
     return day !== 0 && day !== 1;
   };
-
-
 
   return (
     <div className="flex justify-start text-lg mt-2">
@@ -27,6 +25,7 @@ function Calendar({ selectedDay, handleSelectedDay }) {
         maxDate={addDays(new Date(), 30)}
         onChange={(date) => {
           setStartDate(date);
+          handleSelectedTime()
           handleSelectedDay(format(date, "yyyy-MM-dd")); // Llama a la función para guardar la fecha seleccionada
         }}
         placeholderText="Elegi una fecha"
