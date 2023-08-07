@@ -2,7 +2,6 @@ import { useTurns } from "../context/TurnContext";
 
 const Turnos = ({ selectedTime, handleSelectedTime, selectedDay }) => {
   const { turns, turnError, selectedPeriod, setSelectedPeriod } = useTurns();
-  
 
   const handlePeriodChange = (period) => {
     setSelectedPeriod(period);
@@ -21,19 +20,18 @@ const Turnos = ({ selectedTime, handleSelectedTime, selectedDay }) => {
         } else if (selectedPeriod === "afternoon") {
           return hour >= 13 && hour < 20;
         } else {
-          return ""; 
+          return "";
         }
       })
     : [];
 
   const style = `bg-white p-3 md:p-4 rounded-lg shadow hover:opacity-50 ${
-    selectedTime === filteredTimes
+    selectedPeriod === selectedTime
       ? "bg-green-500 text-white hover:opacity-100"
       : ""
   }`;
   const isTimeAvailable = filteredTimes.includes(selectedTime);
-  console.log(turnError);
-  console.log(turns);
+
   return (
     <>
       <div className="mt-8 mb-4">
@@ -69,9 +67,17 @@ const Turnos = ({ selectedTime, handleSelectedTime, selectedDay }) => {
           </div>
         </div>
         <div className="container mx-auto">
-          {turns.length === 0 && turnError === null ? (
+          {selectedPeriod === "" ? (
+            <p className="text-center text-red-500 font-bold">
+              Por favor selecciona un horario.
+            </p>
+          ) : null}
+          {
+          (selectedPeriod !== "" &&
+            selectedDay &&
+            filteredTimes.length === 0 && !turnError) ? (
             <p className="text-center text-red-500 font-bold m-20">
-              No hay turnos disponibles para este día
+              No hay turnos disponibles.
             </p>
           ) : null}
           {turnError ? (

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import {
   Popover,
@@ -9,9 +9,16 @@ import Modal from "../components/Modal";
 import { useTurns } from "../context/TurnContext";
 
 function Turnos() {
-  const [selectedTime, setSelectedTime] = useState("");
-  const { register, handleSubmit, reset } = useForm();
-  const [selectedDay, setSelectedDay] = useState("");
+  const [selectedTime, setSelectedTime] = useState(null);
+  const [selectedDay, setSelectedDay] = useState(null);
+  // const [formSubmitted, setFormSubmitted] = useState(false);
+  const {
+    register,
+    handleSubmit,
+    reset,
+    clearErrors,
+    formState: { errors },
+  } = useForm();
   const { createTurn, setStartDate, setSelectedPeriod } = useTurns();
 
   const handleSelectedTime = (time) => {
@@ -32,12 +39,38 @@ function Turnos() {
     };
     console.log(turn);
     createTurn(turn);
-    setSelectedDay()
-    setSelectedTime()
-    setStartDate()
-    setSelectedPeriod()
-    reset()
+    setSelectedDay();
+    setSelectedTime();
+    setStartDate();
+    setSelectedPeriod();
+    reset();
   });
+
+  useEffect(() => {
+    if (selectedDay && selectedTime) {
+      // Cuando hay valor en selectedDay y selectedTime, forzar un re-renderizado
+      // para que los inputs muestren los valores seleccionados
+      reset({
+        date: selectedDay,
+        hour: selectedTime,
+      });
+    }
+  }, [selectedDay, selectedTime, reset]);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (Object.keys(errors).length > 0) {
+        clearErrors();
+      }
+    }, 4000); // Espera 4 segundos antes de limpiar los errores
+
+    return () => clearTimeout(timer); // Limpia el temporizador si el componente se desmonta antes de que se complete el tiempo de espera
+
+  }, [errors, clearErrors, onSubmit]);
+
+  // Expresión regular para validar el número de teléfono de WhatsApp
+  const whatsappRegex = /^(\+[0-9]{1,3})?[0-9]{9,}$/;
+  console.log(errors);
 
   return (
     <div className="flex flex-col m-4">
@@ -58,10 +91,15 @@ function Turnos() {
               <input
                 type="text"
                 id="name"
-                {...register("name")}
+                {...register("name", { required: "Este campo es obligatorio" })}
                 placeholder="Ingresa tu nombre"
                 className="mt-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
               />
+              {errors.name && (
+                <span className="text-red-500 text-sm">
+                  {errors.name.message}
+                </span>
+              )}
             </div>
 
             <div className="flex flex-col">
@@ -74,10 +112,21 @@ function Turnos() {
               <input
                 type="text"
                 id="phone"
-                {...register("phone")}
+                {...register("phone", {
+                  required: "Este campo es obligatorio",
+                  pattern: {
+                    value: whatsappRegex,
+                    message: "Ingresa un número válido",
+                  },
+                })}
                 placeholder="Ingresa tu numero"
                 className="mt-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
               />
+              {errors.phone && (
+                <span className="text-red-500 text-sm">
+                  {errors.phone.message}
+                </span>
+              )}
             </div>
 
             <div className="flex flex-col">
@@ -87,28 +136,37 @@ function Turnos() {
               >
                 Fecha y Hora
               </label>
-              {selectedTime && selectedDay ? (
-                <>
-                  <input
-                    type="text"
-                    id="date"
-                    {...register("date")}
-                    value={selectedDay}
-                    readOnly
-                    className="mt-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
-                  />
-                  <input
-                    type="text"
-                    value={selectedTime}
-                    readOnly
-                    {...register("hour")}
-                    id="hour"
-                    className="mt-4 mb-4 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
-                  />
-                </>
-              ) : (
-                ""
+              <input
+                type="text"
+                id="date"
+                {...register("date", {
+                  required: "Este campo es obligatorio",
+                })}
+                value={selectedDay ? selectedDay : ""}
+                readOnly
+                className={`mt-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50 ${
+                  !selectedTime && !selectedDay ? 'hidden' : ''
+                }`}
+              />
+
+              <input
+                type="text"
+                {...register("hour", {
+                  required: "Este campo es obligatorio",
+                })}
+                value={selectedTime ? selectedTime : ""}
+                readOnly
+                id="hour"
+                className={`mt-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50 mb-2 ${
+                  !selectedTime && !selectedDay ? 'hidden' : ''
+                }`}
+              />
+              {errors.hour && (
+                <span className="text-red-500 text-sm">
+                  {errors.hour.message}
+                </span>
               )}
+
               <Modal
                 selectedTime={selectedTime}
                 handleSelectedTime={handleSelectedTime}
@@ -128,7 +186,7 @@ function Turnos() {
               <select
                 id="service"
                 className="mt-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
-                {...register("service")}
+                {...register("service", { required: true })}
               >
                 <option value={"Corte"}>Corte</option>
                 <option value={"Barba"}>Barba</option>
