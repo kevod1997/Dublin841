@@ -1,7 +1,6 @@
 import Contacto from "./Contacto";
 import Servicios from "./Servicios";
 import Turnos from "./Turnos";
-
 import { useEffect } from 'react';
 
 function Home() {

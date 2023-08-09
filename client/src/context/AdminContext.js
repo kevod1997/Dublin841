@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { getTurnsByDateAdmin } from "../api/admin";
+import { deleteTurn, getTurnsByDateAdmin } from "../api/admin";
 import { format } from "date-fns";
 
 export const adminContext = createContext();
@@ -19,6 +19,7 @@ export const AdminProvider = ({ children }) => {
     if (pickDay) {
       (async () => {
         const turnsData = await getTurnsAdmin(pickDay);
+        console.log(turnsData);
         if (Array.isArray(turnsData)) {
           setTurnError(null);
           setTurns(turnsData);
@@ -40,10 +41,18 @@ export const AdminProvider = ({ children }) => {
     }
   };
 
-  console.log(turns);
+  const deleteTurnByAdmin = async (id) => {
+    try {
+      const res = await deleteTurn(id);
+      if(res.status === 204) setTurns(turns.filter(turn => turn._id !== id))
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <adminContext.Provider
-      value={{ getTurnsAdmin, turns, setTurns, pickDay, setPickDay }}
+      value={{ getTurnsAdmin, turns, setTurns, pickDay, setPickDay, deleteTurnByAdmin, turnError }}
     >
       {children}
     </adminContext.Provider>

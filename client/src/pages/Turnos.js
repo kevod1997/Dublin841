@@ -7,10 +7,15 @@ import {
 } from "@material-tailwind/react";
 import Modal from "../components/Modal";
 import { useTurns } from "../context/TurnContext";
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
+import { addDays, format } from "date-fns";
+import es from "date-fns/locale/es/index";
 
 function Turnos() {
   const [selectedTime, setSelectedTime] = useState(null);
   const [selectedDay, setSelectedDay] = useState(null);
+  const MySwal = withReactContent(Swal)
 
   const {
     register,
@@ -37,8 +42,13 @@ function Turnos() {
       hour: selectedTime,
       service: data.service,
     };
-    console.log(turn);
-    createTurn(turn);
+    createTurn(turn)
+    MySwal.fire({
+      icon: 'success',
+      title: `Has solicitado un turno para el ${format(addDays(new Date(turn.date), 1), "d 'de' MMMM", {locale: es})} a las ${turn.hour}, por favor en caso de no poder asistar avisanos con anticipación.`,
+      showConfirmButton: true,
+      timer: 10000
+    })
     setSelectedDay();
     setSelectedTime();
     setStartDate();
@@ -90,7 +100,7 @@ function Turnos() {
                 type="text"
                 id="name"
                 {...register("name", { required: "Este campo es obligatorio" })}
-                placeholder="Ingresa tu nombre"
+                placeholder="Nombre completo"
                 className="mt-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
               />
               {errors.name && (
@@ -117,7 +127,7 @@ function Turnos() {
                     message: "Ingresa un número válido",
                   },
                 })}
-                placeholder="Ingresa tu numero"
+                placeholder="Codigo de area + numero"
                 className="mt-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
               />
               {errors.phone && (

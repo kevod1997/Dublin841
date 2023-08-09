@@ -35,47 +35,49 @@ const Turnos = ({ selectedTime, handleSelectedTime, selectedDay }) => {
   return (
     <>
       <div className="mt-8 mb-4">
-        <div className="flex items-center mb-4">
-          <p className="text-lg font-medium leading-normal text-gray-800 ml-3 ">
-            Horarios disponibles
-          </p>
-          <div className="ml-6">
-            <div className="flex">
-              <button
-                type="button"
-                className={`flex-grow px-4 py-2 mb-2 rounded-lg ${
-                  selectedPeriod === "morning"
-                    ? "bg-blue-500 text-white"
-                    : "bg-gray-200 text-gray-800"
-                }`}
-                onClick={() => handlePeriodChange("morning")}
-              >
-                Mañana
-              </button>
-              <button
-                type="button"
-                className={`flex-grow px-4 py-2 rounded-lg ml-4 mr-6 mb-2 ${
-                  selectedPeriod === "afternoon"
-                    ? "bg-blue-500 text-white"
-                    : "bg-gray-200 text-gray-800"
-                }`}
-                onClick={() => handlePeriodChange("afternoon")}
-              >
-                Tarde
-              </button>
+        {!turnError && (
+          <div className="flex items-center mb-4">
+            <p className="text-lg font-medium leading-normal text-gray-800 ml-3 ">
+              Horarios disponibles
+            </p>
+            <div className="ml-6">
+              <div className="flex">
+                <button
+                  type="button"
+                  className={`flex-grow px-4 py-2 mb-2 rounded-lg ${
+                    selectedPeriod === "morning"
+                      ? "bg-blue-500 text-white"
+                      : "bg-gray-200 text-gray-800"
+                  }`}
+                  onClick={() => handlePeriodChange("morning")}
+                >
+                  Mañana
+                </button>
+                <button
+                  type="button"
+                  className={`flex-grow px-4 py-2 rounded-lg ml-4 mr-6 mb-2 ${
+                    selectedPeriod === "afternoon"
+                      ? "bg-blue-500 text-white"
+                      : "bg-gray-200 text-gray-800"
+                  }`}
+                  onClick={() => handlePeriodChange("afternoon")}
+                >
+                  Tarde
+                </button>
+              </div>
             </div>
           </div>
-        </div>
+        )}
         <div className="container mx-auto">
           {selectedPeriod === "" ? (
             <p className="text-center text-red-500 font-bold">
               Por favor selecciona un horario.
             </p>
           ) : null}
-          {
-          (selectedPeriod !== "" &&
-            selectedDay &&
-            filteredTimes.length === 0 && !turnError) ? (
+          {selectedPeriod !== "" &&
+          selectedDay &&
+          filteredTimes.length === 0 &&
+          !turnError ? (
             <p className="text-center text-red-500 font-bold m-20">
               No hay turnos disponibles.
             </p>

@@ -11,6 +11,7 @@ import ProtectedRoute from "./ProtectedRoute";
 import AdminPage from "./pages/Admin/AdminPage";
 import { AdminProvider } from "./context/AdminContext";
 
+
 function App() {
   const notDisplayLayout =
     window.location.pathname === "/login" ||

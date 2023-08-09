@@ -1,4 +1,4 @@
-import { addDays, format, getDay } from "date-fns";
+import { addDays, getDay } from "date-fns";
 import DatePicker from "react-datepicker";
 import { registerLocale } from "react-datepicker";
 import es from "date-fns/locale/es";
@@ -14,7 +14,7 @@ function Calendar({ pickDay, setPickDay }) {
   };
 
   return (
-    <div className="flex justify-start text-lg mt-2">
+    <div className="flex justify-center text-lg mt-2">
       <p className="ml-3">Fecha:</p>
       <DatePicker
         filterDate={isWeekday}

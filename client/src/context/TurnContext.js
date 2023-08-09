@@ -24,7 +24,7 @@ export const TurnProvider = ({ children }) => {
           setTurnError(null); // Resetea el mensaje de error si la solicitud es exitosa
           setTurns(turnsData);
           
-        } else if (typeof turnsData === "object" && turnsData.error) {
+        } else{
           setTurns([]); // Resetea los turnos a un array vacío en caso de un error
           setTurnError(turnsData.error); // Establece el mensaje de error
         }
