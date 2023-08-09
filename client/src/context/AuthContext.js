@@ -46,36 +46,37 @@ export const AuthProvider = ({ children }) => {
         }
     }, [authError])
 
-    useEffect(()=> {
-        async function checkLogin() {
-            const cookies = Cookies.get("token")
-
-            if(!cookies.token){
-                setIsAuthenticated(false)
-                setLoading(false)
-                return setAdmin(null)
-            }
-
-            try {
-                const res = await verifyTokenRequest(cookies.token)
-                console.log(res)
-                if(!res.data){
-                    setIsAuthenticated(false)
-                    setLoading(false)
-                    return 
-                }
-                setIsAuthenticated(true)
-                setAdmin(res.data)
-                setLoading(false)
-            } catch (error) {
-                console.log(error)
-                setIsAuthenticated(false)
-                setAdmin(null)
-                setLoading(false)
-            }
+    useEffect(() => {
+      async function checkLogin() {
+        const cookies = Cookies.get();
+  
+        if (!cookies.token){
+          setIsAuthenticated(false);
+          setLoading(false);
+          return setAdmin(null);
+        } 
+  
+          try {
+            const res = await verifyTokenRequest(cookies.token);
+            console.log(res);
+            if (!res.data) {
+            setIsAuthenticated(false);
+            setLoading(false);
+            return
+            } 
+  
+            setIsAuthenticated(true);
+            setAdmin(res.data);
+            setLoading(false);
+          } catch (error) {
+            console.log(error);
+            setIsAuthenticated(false);
+            setAdmin(null);
+            setLoading(false);
         }
-        checkLogin()
-    }, [])
+      }
+      checkLogin();
+    }, []);
 
   return (
     <AuthContext.Provider value={{ signIn, logout, admin, isAuthenticated, authError, loading }}>{children}</AuthContext.Provider>

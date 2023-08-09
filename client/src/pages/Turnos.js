@@ -11,7 +11,7 @@ import { useTurns } from "../context/TurnContext";
 function Turnos() {
   const [selectedTime, setSelectedTime] = useState(null);
   const [selectedDay, setSelectedDay] = useState(null);
-  // const [formSubmitted, setFormSubmitted] = useState(false);
+
   const {
     register,
     handleSubmit,
@@ -62,13 +62,11 @@ function Turnos() {
       if (Object.keys(errors).length > 0) {
         clearErrors();
       }
-    }, 4000); // Espera 4 segundos antes de limpiar los errores
+    }, 4000);
 
-    return () => clearTimeout(timer); // Limpia el temporizador si el componente se desmonta antes de que se complete el tiempo de espera
-
+    return () => clearTimeout(timer);
   }, [errors, clearErrors, onSubmit]);
 
-  // Expresión regular para validar el número de teléfono de WhatsApp
   const whatsappRegex = /^(\+[0-9]{1,3})?[0-9]{9,}$/;
   console.log(errors);
 
@@ -145,7 +143,7 @@ function Turnos() {
                 value={selectedDay ? selectedDay : ""}
                 readOnly
                 className={`mt-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50 ${
-                  !selectedTime && !selectedDay ? 'hidden' : ''
+                  !selectedTime && !selectedDay ? "hidden" : ""
                 }`}
               />
 
@@ -156,9 +154,10 @@ function Turnos() {
                 })}
                 value={selectedTime ? selectedTime : ""}
                 readOnly
+                placeholder="Elegi un horario"
                 id="hour"
                 className={`mt-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50 mb-2 ${
-                  !selectedTime && !selectedDay ? 'hidden' : ''
+                  !selectedTime && !selectedDay ? "hidden" : ""
                 }`}
               />
               {errors.hour && (

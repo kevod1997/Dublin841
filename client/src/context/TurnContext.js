@@ -23,6 +23,7 @@ export const TurnProvider = ({ children }) => {
         if (Array.isArray(turnsData)) {
           setTurnError(null); // Resetea el mensaje de error si la solicitud es exitosa
           setTurns(turnsData);
+          
         } else if (typeof turnsData === "object" && turnsData.error) {
           setTurns([]); // Resetea los turnos a un array vacío en caso de un error
           setTurnError(turnsData.error); // Establece el mensaje de error
@@ -40,12 +41,6 @@ export const TurnProvider = ({ children }) => {
     }
   };
 
-//   const deleteTurn = async (id) => {
-//     const res = await deleteTurnRequest(id);
-//     if (res.status === 204) {
-//       setTurns(turns.filter((turn) => turn._id !== id));
-//     }
-//   };
 
   const getTurns = async (date) => {
       try {
@@ -59,7 +54,7 @@ export const TurnProvider = ({ children }) => {
       }
   };
   
-
+  console.log(turns);
   return (
     <turnContext.Provider
       value={{ turns, startDate, setStartDate, turnError, createTurn, selectedPeriod, setSelectedPeriod }}

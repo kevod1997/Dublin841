@@ -2,11 +2,12 @@ import React from "react";
 import Calendar from "./Calendar";
 import Turnos from "./TurnForm";
 
-function Modal({ selectedTime, handleSelectedTime, selectedDay, handleSelectedDay}) {
-
-  
-
-
+function Modal({
+  selectedTime,
+  handleSelectedTime,
+  selectedDay,
+  handleSelectedDay,
+}) {
   return (
     <>
       <button
@@ -36,9 +37,17 @@ function Modal({ selectedTime, handleSelectedTime, selectedDay, handleSelectedDa
               </h1>
             </div>
             <div>
-              <Calendar selectedDay={selectedDay} handleSelectedDay={handleSelectedDay} handleSelectedTime={handleSelectedTime} />
+              <Calendar
+                selectedDay={selectedDay}
+                handleSelectedDay={handleSelectedDay}
+                handleSelectedTime={handleSelectedTime}
+              />
             </div>
-            <Turnos selectedTime={selectedTime} handleSelectedTime={handleSelectedTime} selectedDay={selectedDay}/>
+            <Turnos
+              selectedTime={selectedTime}
+              handleSelectedTime={handleSelectedTime}
+              selectedDay={selectedDay}
+            />
             <div className="modal-footer flex flex-shrink-0 flex-wrap items-center justify-end p-4 border-t border-gray-200 rounded-b-md">
               <button
                 type="button"

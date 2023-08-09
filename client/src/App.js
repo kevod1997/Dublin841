@@ -7,28 +7,37 @@ import Home from "./pages/Home";
 import { TurnProvider } from "./context/TurnContext";
 import { AuthProvider } from "./context/AuthContext";
 import LoginPage from "./pages/Admin/LoginPage";
-import React from "react";
+import ProtectedRoute from "./ProtectedRoute";
+import AdminPage from "./pages/Admin/AdminPage";
+import { AdminProvider } from "./context/AdminContext";
 
 function App() {
-  const isLoginPage = window.location.pathname === '/login';
+  const notDisplayLayout =
+    window.location.pathname === "/login" ||
+    window.location.pathname.startsWith("/admin");
 
   return (
     <>
       <AuthProvider>
         <TurnProvider>
-          <BrowserRouter>
-            {!isLoginPage && (
-              <>
-                <NavBar />
-                <Carrousel />
-              </>
-            )}
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/login" element={<LoginPage />} />
-            </Routes>
-            {!isLoginPage && <Footer />}
-          </BrowserRouter>
+          <AdminProvider>
+            <BrowserRouter>
+              {!notDisplayLayout && (
+                <>
+                  <NavBar />
+                  <Carrousel />
+                </>
+              )}
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/login" element={<LoginPage />} />
+                <Route element={<ProtectedRoute />}>
+                  <Route path="/admin" element={<AdminPage />} />
+                </Route>
+              </Routes>
+              {!notDisplayLayout && <Footer />}
+            </BrowserRouter>
+          </AdminProvider>
         </TurnProvider>
       </AuthProvider>
     </>

@@ -9,7 +9,7 @@ const LoginPage = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const { signIn, errors: signInErrors, isAuthenticated } = useAuth();
+  const { signIn, authError: signInErrors, isAuthenticated, admin } = useAuth();
   const navigate = useNavigate();
 
   const onSubmit = handleSubmit((data) => {
@@ -17,13 +17,17 @@ const LoginPage = () => {
   });
 
   useEffect(() => {
-    if (isAuthenticated) navigate("/");
+    if (isAuthenticated) navigate("/admin");
   }, [isAuthenticated]);
-
+  console.log(isAuthenticated);
+  console.log(admin);
   return (
     <div>
+      <div className="flex justify-center">
+        <h1 className="text-2xl font-bold my-4">Ingresa al panel del administrador</h1>
+      </div>
       <form onSubmit={onSubmit}>
-        <div className="flex flex-col items-center justify-center mt-10">
+        <div className="flex flex-col items-center justify-center mt-6">
           <div className="flex flex-col items-center justify-center">
             <label htmlFor="email" className="text-gray-800 font-bold">
               Usuario
@@ -62,13 +66,20 @@ const LoginPage = () => {
               </span>
             )}
           </div>
+          {signInErrors.map((error, index) => (
+          <div
+            key={index}
+            className="bg-red-500 p-2 text-white text-center m-2"
+          >
+            {error}
+          </div>
+        ))}
           <button
             type="submit"
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg mt-4"
           >
             Ingresar
           </button>
-         
         </div>
       </form>
     </div>
