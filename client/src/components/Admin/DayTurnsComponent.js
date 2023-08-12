@@ -1,6 +1,6 @@
 import React from 'react'
 import { useAdmin } from '../../context/AdminContext'
-import Calendar from '../../components/Admin/Calendar'
+import Calendar from './Calendar'
 import { parse } from 'date-fns'
 
 const DayTurnsComponent = () => {

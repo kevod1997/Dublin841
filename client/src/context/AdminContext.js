@@ -14,6 +14,7 @@ export const AdminProvider = ({ children }) => {
   const [turns, setTurns] = useState([]);
   const [turnError, setTurnError] = useState();
   const [pickDay, setPickDay] = useState();
+  const [notifications, setNotifications] = useState([]);
 
   useEffect(() => {
     if (pickDay) {
@@ -30,6 +31,7 @@ export const AdminProvider = ({ children }) => {
       })();
     }
   }, [pickDay]);
+
 
   const getTurnsAdmin = async (date) => {
     try {
@@ -52,7 +54,7 @@ export const AdminProvider = ({ children }) => {
 
   return (
     <adminContext.Provider
-      value={{ getTurnsAdmin, turns, setTurns, pickDay, setPickDay, deleteTurnByAdmin, turnError }}
+      value={{ getTurnsAdmin, turns, setTurns, pickDay, setPickDay, deleteTurnByAdmin, turnError, notifications, setNotifications }}
     >
       {children}
     </adminContext.Provider>

@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { loginRequest, verifyTokenRequest } from "../api/auth";
 import Cookies from "js-cookie";
+import io from 'socket.io-client';
 
 export const AuthContext = createContext();
 
@@ -17,6 +18,7 @@ export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [authError, setAuthError] = useState([]);
   const [loading , setLoading] = useState(true)
+
 
   const signIn = async (admin) => {
     try {
